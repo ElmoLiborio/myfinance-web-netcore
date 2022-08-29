@@ -41,26 +41,26 @@ namespace myfinance_web_netcore.Models
             objDAL.Desconectar();
         }
 
-            public PlanoContaModel CarregarPlanoContaPorId(int? id)
+         public PlanoContaModel CarregarPlanoContaPorId(int? id)
+        {
+            
+        var objDAL =  DAL.GetInstancia;
+        objDAL.Conectar();
+            
+        var sql = $"SELECT ID, DESCRICAO, TIPO FROM PLANO_CONTAS WHERE ID ={id}";
+        var dataTable = objDAL.RetornarDataTable(sql);
+            
+            
+            var planoConta = new PlanoContaModel()
             {
+                Id=int.Parse(dataTable.Rows[0]["ID"].ToString()),
+                Descricao=dataTable.Rows[0]["DESCRICAO"].ToString(),
+                Tipo=dataTable.Rows[0]["TIPO"].ToString()
+            };
             
-            var objDAL =  DAL.GetInstancia;
-            objDAL.Conectar();
-            
-            var sql = $"SELECT ID, DESCRICAO, TIPO FROM PLANO_CONTAS WHERE ID ={id}";
-            var dataTable = objDAL.RetornarDataTable(sql);
-            
-            
-                var planoConta = new PlanoContaModel()
-                {
-                    Id=int.Parse(dataTable.Rows[0]["ID"].ToString()),
-                    Descricao=dataTable.Rows[0]["DESCRICAO"].ToString(),
-                    Tipo=dataTable.Rows[0]["TIPO"].ToString()
-                };
-            
-                objDAL.Desconectar();
-                return planoConta;
-            }
+            objDAL.Desconectar();
+            return planoConta;
+        }
 
         public List<PlanoContaModel>ListaPlanoContas()
         {
