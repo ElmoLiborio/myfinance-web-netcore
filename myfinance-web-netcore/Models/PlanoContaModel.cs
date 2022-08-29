@@ -20,6 +20,15 @@ namespace myfinance_web_netcore.Models
             objDAL.ExecutarComandoSql(sql);
             objDAL.Desconectar();
         }
+        public void Excluir(int id)
+        {
+            var objDAL =  DAL.GetInstancia;
+            objDAL.Conectar();
+            var sql = $"DELETE FROM PLANO_CONTAS WHERE ID = {id}";
+            objDAL.ExecutarComandoSql(sql);
+            objDAL.Desconectar();
+        }
+
 
         public List<PlanoContaModel>ListaPlanoContas()
         {

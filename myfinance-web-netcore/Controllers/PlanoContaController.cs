@@ -37,5 +37,12 @@ namespace myfinance_web_netcore.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult ExcluirPlanoConta(int id)
+        {
+            new PlanoContaModel().Excluir(id);
+            return RedirectToAction("Index");
+        }
+
     }
 }
