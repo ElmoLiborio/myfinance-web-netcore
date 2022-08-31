@@ -56,14 +56,6 @@ namespace myfinance_web_netcore.Controllers
         [HttpGet]
          public IActionResult FiltrarTransacao()
         {
-            //if( DateTime.Parse(formulario.Data1.ToString()).ToString("yyyyMMdd")!="" && DateTime.Parse(formulario.Data2.ToString()).ToString("yyyyMMdd")!="")
-          
-              //var transacao = new Transacao();
-              //transacao.FiltrarTransacaoPorPeriodo(formulario);
-              //ViewBag.Registro = transacao;
-            
-        
-          //  ViewBag.ListaPlanoContas=new PlanoContaModel().ListaPlanoContas();
             return View();
         }
         
@@ -72,8 +64,6 @@ namespace myfinance_web_netcore.Controllers
         {   
                 var transacao = new Transacao();
                 ViewBag.Lista = transacao.FiltrarTransacaoPorPeriodo(formulario);
-                //ViewBag.Registro = transacao;
-                //ViewBag.Lista=new PlanoContaModel().ListaPlanoContas();
                 return View();
         }
 

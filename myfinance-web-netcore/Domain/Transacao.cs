@@ -55,7 +55,7 @@ namespace myfinance_web_netcore.Domain
             var objDAL =  DAL.GetInstancia;
             objDAL.Conectar();
             
-            var sql = $"SELECT ID, DATA, VALOR, TIPO, HISTORICO, ID_PLANO_CONTA FROM TRANSACAO WHERE DATA BETWEEN  '{formulario.Data1}' AND '{formulario.Data2}' ORDER BY DATA";
+            var sql = $"SELECT T.ID, T.DATA, T.VALOR, T.TIPO, T.HISTORICO, P.DESCRICAO FROM TRANSACAO T INNER JOIN PLANO_CONTAS P ON T.ID_PLANO_CONTA = P.ID WHERE DATA BETWEEN  '{formulario.Data1}' AND '{formulario.Data2}' ORDER BY DATA";
             var dataTable = objDAL.RetornarDataTable(sql);
         
 
@@ -68,7 +68,9 @@ namespace myfinance_web_netcore.Domain
                     Tipo = dataTable.Rows[i]["TIPO"].ToString(),
                     Data = DateTime.Parse(dataTable.Rows[i]["DATA"].ToString()),
                     Valor = decimal.Parse(dataTable.Rows[i]["VALOR"].ToString()),
-                    IdPlanoConta = int.Parse(dataTable.Rows[i]["ID_PLANO_CONTA"].ToString())
+                    Descricao= dataTable.Rows[i]["DESCRICAO"].ToString(),
+                    Data1=formulario.Data1,
+                    Data2=formulario.Data2
                     };
                 lista.Add(transacao);
                 }

@@ -12,6 +12,7 @@
     var vId= 0;
     var vData="";
     var vHistorico="";
+    var vDescricao="";
     var vTipo="";
     var vValor="";
     var vPlanoContaId=0;
@@ -23,6 +24,7 @@ try
     vData = DateTime.Parse(@ViewBag.Registro.Data.ToString()).ToString("yyyy-MM-dd");
     vPlanoContaId = int.Parse(ViewBag.Registro.IdPlanoConta.ToString());
     vHistorico=@ViewBag.Registro.Historico.ToString();
+    vDescricao=@ViewBag.Registro.Descricao.ToString();
     vTipo = @ViewBag.Registro.Tipo.ToString();
     
     CultureInfo invC = CultureInfo.InvariantCulture;
@@ -52,14 +54,12 @@ catch{}
     <hr>
 <table class='table table-bordered'>
     <tr>
-        <th>#</th>
-        <th>#</th>
         <th>ID</th>
         <th>Data</th>
         <th>Valor</th>
         <th>Descrição</th>
         <th>Tipo</th>
-        <th>Plano Conta</th>
+        <th>Plano de Conta</th>
     </tr>
 
 @{
@@ -68,24 +68,22 @@ catch{}
         foreach(var item in (List<TransacaoModel>)ViewBag.Lista)
         {
             <tr>
-                <td><button type="button" class="btn btn-block btn-warning" onclick="EditarTransacao(@item.Id.ToString())">Editar</button></td>
-                <td><button type="button" class="btn btn-block btn-danger" onclick="ExcluirTransacao(@item.Id.ToString())">Excluir</button></td>
                 <td>@item.Id</td>             
                 <td>@item.Data</td>
-                <td>@item.Valor</td>
-                <td>@item.Historico</td>
                 <td>@item.Tipo</td>
-                <td>@item.IdPlanoConta</td>
+                <td>R$ @item.Valor</td>
+                <td>@item.Historico</td>
+                <td>@item.Descricao</td>
                 
             </tr>
         }
     }
-
+    
 }
 </table>
 
 <br>
-<button type="submit" class="btn btn-block btn-success">Enviar</button>
+<button type="submit" class="btn btn-block btn-success">Filtrar</button>
 
-
+<hr>
 </form>
