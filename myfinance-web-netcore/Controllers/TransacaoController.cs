@@ -53,6 +53,30 @@ namespace myfinance_web_netcore.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+         public IActionResult FiltrarTransacao()
+        {
+            //if( DateTime.Parse(formulario.Data1.ToString()).ToString("yyyyMMdd")!="" && DateTime.Parse(formulario.Data2.ToString()).ToString("yyyyMMdd")!="")
+          
+              //var transacao = new Transacao();
+              //transacao.FiltrarTransacaoPorPeriodo(formulario);
+              //ViewBag.Registro = transacao;
+            
+        
+          //  ViewBag.ListaPlanoContas=new PlanoContaModel().ListaPlanoContas();
+            return View();
+        }
+        
+        [HttpPost]
+         public IActionResult FiltrarTransacao(TransacaoModel formulario)
+        {   
+                var transacao = new Transacao();
+                ViewBag.Lista = transacao.FiltrarTransacaoPorPeriodo(formulario);
+                //ViewBag.Registro = transacao;
+                //ViewBag.Lista=new PlanoContaModel().ListaPlanoContas();
+                return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

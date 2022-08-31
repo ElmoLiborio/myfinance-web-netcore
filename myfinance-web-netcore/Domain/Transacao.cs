@@ -48,6 +48,35 @@ namespace myfinance_web_netcore.Domain
             objDAL.Desconectar();
             return transacao;
         }
+
+        public List<TransacaoModel> FiltrarTransacaoPorPeriodo(TransacaoModel formulario)
+        {
+            List<TransacaoModel> lista = new List<TransacaoModel>();
+            var objDAL =  DAL.GetInstancia;
+            objDAL.Conectar();
+            
+            var sql = $"SELECT ID, DATA, VALOR, TIPO, HISTORICO, ID_PLANO_CONTA FROM TRANSACAO WHERE DATA BETWEEN  '{formulario.Data1}' AND '{formulario.Data2}' ORDER BY DATA";
+            var dataTable = objDAL.RetornarDataTable(sql);
+        
+
+                for(int i=0;i<dataTable.Rows.Count;i++)
+                {
+                var transacao = new TransacaoModel()
+                    { 
+                    Id=int.Parse(dataTable.Rows[i]["ID"].ToString()),
+                    Historico = dataTable.Rows[i]["HISTORICO"].ToString(),
+                    Tipo = dataTable.Rows[i]["TIPO"].ToString(),
+                    Data = DateTime.Parse(dataTable.Rows[i]["DATA"].ToString()),
+                    Valor = decimal.Parse(dataTable.Rows[i]["VALOR"].ToString()),
+                    IdPlanoConta = int.Parse(dataTable.Rows[i]["ID_PLANO_CONTA"].ToString())
+                    };
+                lista.Add(transacao);
+                }
+            
+            objDAL.Desconectar();
+            return lista;
+        }
+
         public void Excluir(int id)
         {
             var objDAL =  DAL.GetInstancia;
@@ -62,7 +91,7 @@ namespace myfinance_web_netcore.Domain
             objDAL.Conectar();
             
             var sql = $"UPDATE TRANSACAO SET " +
-            $"DATA='{formulario.Data}'," +
+            $"DATA='{formulario.Data.ToString("yyyyMMdd")}'," +
             $"VALOR='{formulario.Valor}', " +
             $"TIPO='{formulario.Tipo}', " +
             $"HISTORICO='{formulario.Historico}', " +
@@ -79,7 +108,7 @@ namespace myfinance_web_netcore.Domain
             var objDAL =  DAL.GetInstancia;
             objDAL.Conectar();
             
-            var sql = "SELECT ID, DATA, VALOR, TIPO, HISTORICO, ID_PLANO_CONTA FROM TRANSACAO";
+            var sql = "SELECT ID, DATA, VALOR, TIPO, HISTORICO, ID_PLANO_CONTA FROM TRANSACAO ORDER BY DATA";
             var dataTable = objDAL.RetornarDataTable(sql);
             
             for(int i=0;i<dataTable.Rows.Count;i++)

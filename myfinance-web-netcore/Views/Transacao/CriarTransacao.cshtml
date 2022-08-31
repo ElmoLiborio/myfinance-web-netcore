@@ -13,6 +13,7 @@
     var vValor="";
     var vId= 0;
     var vPlanoContaId=0;
+   
 
 try
 {   
@@ -21,7 +22,7 @@ try
     vPlanoContaId = int.Parse(ViewBag.Registro.IdPlanoConta.ToString());
     vHistorico=@ViewBag.Registro.Historico.ToString();
     vTipo = @ViewBag.Registro.Tipo.ToString();
-
+    
     CultureInfo invC = CultureInfo.InvariantCulture;
     string value;
     value = @ViewBag.Registro.Valor.ToString(invC);
@@ -79,7 +80,7 @@ catch{}
     </select>
 </div>
 <br>
-<button type="submit" class="btn btn-block btn-success">Registrar</button>
+<button type="submit" class="btn btn-block btn-success">Enviar</button>
 
 
 </form>

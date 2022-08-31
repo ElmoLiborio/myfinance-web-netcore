@@ -1,0 +1,91 @@
+@using System.Globalization
+
+@model TransacaoModel
+@{
+    ViewData["Title"] = "Filtro de Transação Financeira";   
+}
+
+
+@{
+    var vData1="";
+    var vData2="";
+    var vId= 0;
+    var vData="";
+    var vHistorico="";
+    var vTipo="";
+    var vValor="";
+    var vPlanoContaId=0;
+try
+{   
+    vId = int.Parse(@ViewBag.Registro.Id.ToString());
+    vData1 = DateTime.Parse(@ViewBag.Registro.Data1.ToString()).ToString("yyyyMMdd");
+    vData2 = DateTime.Parse(@ViewBag.Registro.Data2.ToString()).ToString("yyyyMMdd");
+    vData = DateTime.Parse(@ViewBag.Registro.Data.ToString()).ToString("yyyy-MM-dd");
+    vPlanoContaId = int.Parse(ViewBag.Registro.IdPlanoConta.ToString());
+    vHistorico=@ViewBag.Registro.Historico.ToString();
+    vTipo = @ViewBag.Registro.Tipo.ToString();
+    
+    CultureInfo invC = CultureInfo.InvariantCulture;
+    string value;
+    value = @ViewBag.Registro.Valor.ToString(invC);
+    vValor = value;
+}
+catch{}
+
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-controller="Transacao" asp-action="FiltrarTransacao">
+
+<div class="form-group">
+    <label>Data Inicial:</label> 
+    <input type="date" class="form-control" asp-for="Data1" value="@vData1">
+    <span asp-validation-for="Data1" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label>Data Final:</label> 
+    <input type="date" class="form-control" asp-for="Data2" value="@vData2">
+    <span asp-validation-for="Data2" class="text-danger"></span>
+</div>
+    <hr>
+<table class='table table-bordered'>
+    <tr>
+        <th>#</th>
+        <th>#</th>
+        <th>ID</th>
+        <th>Data</th>
+        <th>Valor</th>
+        <th>Descrição</th>
+        <th>Tipo</th>
+        <th>Plano Conta</th>
+    </tr>
+
+@{
+    if(@ViewBag.Lista!=null)
+    {
+        foreach(var item in (List<TransacaoModel>)ViewBag.Lista)
+        {
+            <tr>
+                <td><button type="button" class="btn btn-block btn-warning" onclick="EditarTransacao(@item.Id.ToString())">Editar</button></td>
+                <td><button type="button" class="btn btn-block btn-danger" onclick="ExcluirTransacao(@item.Id.ToString())">Excluir</button></td>
+                <td>@item.Id</td>             
+                <td>@item.Data</td>
+                <td>@item.Valor</td>
+                <td>@item.Historico</td>
+                <td>@item.Tipo</td>
+                <td>@item.IdPlanoConta</td>
+                
+            </tr>
+        }
+    }
+
+}
+</table>
+
+<br>
+<button type="submit" class="btn btn-block btn-success">Enviar</button>
+
+
+</form>

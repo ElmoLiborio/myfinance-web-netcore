@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = " Transações";
-   
+ 
 }
 
 <div class="text-center">
@@ -9,6 +9,9 @@
 
 <hr>
 <button type="button" class="btn btn-block btn-primary" onclick="CriarTransacao()">Registrar Transação</button> 
+
+<button type="button" class="btn btn-block btn-primary" onclick="FiltrarTransacao()">Filtrar Transações</button> 
+
 <hr>
 <table class='table table-bordered'>
     <tr>
@@ -55,6 +58,11 @@
     function ExcluirTransacao(id)
     {
         window.location.href="../Transacao/ExcluirTransacao/"+id;
+    }
+
+    function FiltrarTransacao()
+    {
+        window.location.href = "../Transacao/FiltrarTransacao";
     }
     
 </script>
