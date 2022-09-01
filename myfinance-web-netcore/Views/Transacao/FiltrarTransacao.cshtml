@@ -52,15 +52,16 @@ catch{}
     <span asp-validation-for="Data2" class="text-danger"></span>
 </div>
     <hr>
+
 <table class='table table-bordered'>
-    <tr>
-        <th>ID</th>
-        <th>Data</th>
-        <th>Valor</th>
-        <th>Descrição</th>
-        <th>Tipo</th>
-        <th>Plano de Conta</th>
-    </tr>
+<tr>
+    <th>ID</th>
+    <th>Data</th>
+    <th>Valor</th>
+    <th>Descrição</th>
+    <th>Tipo</th>
+    <th>Plano de Conta</th>
+</tr>
 
 @{
     if(@ViewBag.Lista!=null)
@@ -74,11 +75,10 @@ catch{}
                 <td>R$ @item.Valor</td>
                 <td>@item.Historico</td>
                 <td>@item.Descricao</td>
-                
             </tr>
         }
     }
-    
+        
 }
 </table>
 

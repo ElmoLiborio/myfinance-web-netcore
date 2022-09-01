@@ -29,7 +29,7 @@
     {
         <tr>
             <td><button type="button" class="btn btn-block btn-warning" onclick="EditarTransacao(@item.Id.ToString())">Editar</button></td>
-            <td><button type="button" class="btn btn-block btn-danger" onclick="ExcluirTransacao(@item.Id.ToString())">Excluir</button></td>
+            <td><button type="button" class="btn btn-block btn-danger" onclick="ExcluirTransacao(@item.Id.ToString())" >Excluir</button></td>
             <td>@item.Id</td>             
             <td>@item.Data</td>
             <td>@item.Valor</td>
@@ -52,11 +52,13 @@
     
     function EditarTransacao(id)
     {
+        if (confirm("Deseja realmente editar essa transação?"))
         window.location.href="../Transacao/CriarTransacao/"+id;
     }
     
     function ExcluirTransacao(id)
     {
+        if (confirm("Deseja realmente deletar essa transação?"))
         window.location.href="../Transacao/ExcluirTransacao/"+id;
     }
 
