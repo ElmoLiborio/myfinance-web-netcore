@@ -52,13 +52,11 @@ namespace myfinance_web_netcore.Controllers
             }
             return RedirectToAction("Index");
         }
-
         [HttpGet]
          public IActionResult FiltrarTransacao()
         {
             return View();
         }
-        
         [HttpPost]
          public IActionResult FiltrarTransacao(TransacaoModel formulario)
         {   
@@ -66,13 +64,6 @@ namespace myfinance_web_netcore.Controllers
                 ViewBag.Lista = transacao.FiltrarTransacaoPorPeriodo(formulario);
                 return View();
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
-
         [HttpGet]
         public IActionResult ExcluirTransacao(int id)
         {

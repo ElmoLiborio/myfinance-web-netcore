@@ -10,7 +10,7 @@
 <hr>
 <button type="button" class="btn btn-block btn-primary" onclick="CriarTransacao()">Registrar Transação</button> 
 
-<button type="button" class="btn btn-block btn-primary" onclick="FiltrarTransacao()">Filtrar Transações</button> 
+<button type="button" class="btn btn-block btn-primary" onclick="FiltrarTransacao()">Relatório de Transações</button> 
 
 <hr>
 <table class='table table-bordered'>
@@ -29,10 +29,10 @@
     {
         <tr>
             <td><button type="button" class="btn btn-block btn-warning" onclick="EditarTransacao(@item.Id.ToString())">Editar</button></td>
-            <td><button type="button" class="btn btn-block btn-danger" onclick="ExcluirTransacao(@item.Id.ToString())" >Excluir</button></td>
+            <td><button type="button" class="btn btn-block btn-danger" onclick="ExcluirTransacao(@item.Id.ToString())">Excluir</button></td>
             <td>@item.Id</td>             
-            <td>@item.Data</td>
-            <td>@item.Valor</td>
+            <td>@item.Data.ToString("dd/MM/yyyy")</td>
+            <td>R$ @item.Valor</td>
             <td>@item.Historico</td>
             <td>@item.Tipo</td>
             <td>@item.IdPlanoConta</td>
@@ -52,13 +52,12 @@
     
     function EditarTransacao(id)
     {
-        if (confirm("Deseja realmente editar essa transação?"))
         window.location.href="../Transacao/CriarTransacao/"+id;
     }
     
     function ExcluirTransacao(id)
     {
-        if (confirm("Deseja realmente deletar essa transação?"))
+        if (confirm("Deseja realmente excluir essa transação?"))
         window.location.href="../Transacao/ExcluirTransacao/"+id;
     }
 

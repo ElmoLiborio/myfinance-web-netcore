@@ -9,9 +9,9 @@ namespace myfinance_web_netcore.Models
     {
         public int? Id { get; set; }
         public DateTime Data {get; set;}
-        public decimal Valor{get; set;}
+        public decimal Valor {get; set;}
         public string? Historico { get; set; }
-        public string? Tipo{ get; set; }
+        public string? Tipo { get; set; }
         public int IdPlanoConta {get;set;}
         public DateTime? Data1 {get; set;}
         public DateTime? Data2 {get; set;}
