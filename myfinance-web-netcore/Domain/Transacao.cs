@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using myfinance_web_netcore.Infra;
 using myfinance_web_netcore.Models;
-
+using System.Globalization;
 namespace myfinance_web_netcore.Domain
 {
     public class Transacao
@@ -13,14 +13,16 @@ namespace myfinance_web_netcore.Domain
         {
             var objDAL =  DAL.GetInstancia;
             objDAL.Conectar();
+
+            CultureInfo cultureInfo = CultureInfo.InvariantCulture;
+
             var sql="INSERT INTO TRANSACAO(data, valor, tipo, historico, id_plano_conta) "+
                     $"VALUES(" +
                     $"'{formulario.Data.ToString("yyyyMMdd")}'," +
-                    $"{formulario.Valor}," +
+                    $"{formulario.Valor.ToString(cultureInfo)}," +
                     $"'{formulario.Tipo}'," +
                     $"'{formulario.Historico}'," +
                     $"{formulario.IdPlanoConta})";
-            
             objDAL.ExecutarComandoSql(sql);
             objDAL.Desconectar();
         }
@@ -58,7 +60,6 @@ namespace myfinance_web_netcore.Domain
             var sql = $"SELECT T.ID, T.DATA, T.VALOR, T.TIPO, T.HISTORICO, P.DESCRICAO FROM TRANSACAO T INNER JOIN PLANO_CONTAS P ON T.ID_PLANO_CONTA = P.ID WHERE DATA BETWEEN  '{formulario.Data1}' AND '{formulario.Data2}' ORDER BY DATA";
             var dataTable = objDAL.RetornarDataTable(sql);
         
-
                 for(int i=0;i<dataTable.Rows.Count;i++)
                 {
                 var transacao = new TransacaoModel()
@@ -91,13 +92,13 @@ namespace myfinance_web_netcore.Domain
         {
             var objDAL =  DAL.GetInstancia;
             objDAL.Conectar();
-            
+            CultureInfo cultureInfo = CultureInfo.InvariantCulture;
             var sql = $"UPDATE TRANSACAO SET " +
             $"DATA='{formulario.Data.ToString("yyyyMMdd")}'," +
-            $"VALOR='{formulario.Valor}', " +
+            $"VALOR={formulario.Valor.ToString(cultureInfo)}, " +
             $"TIPO='{formulario.Tipo}', " +
             $"HISTORICO='{formulario.Historico}', " +
-            $"ID_PLANO_CONTA='{formulario.IdPlanoConta}' " +
+            $"ID_PLANO_CONTA={formulario.IdPlanoConta} " +
             $"where id ={formulario.Id}";
             
             objDAL.ExecutarComandoSql(sql);
@@ -117,12 +118,12 @@ namespace myfinance_web_netcore.Domain
             {
                 var transacao = new TransacaoModel()
                 {
-                    Id=int.Parse(dataTable.Rows[i]["ID"].ToString()),
-                    Data= DateTime.Parse(dataTable.Rows[i]["DATA"].ToString()),
-                    Valor= decimal.Parse(dataTable.Rows[i]["VALOR"].ToString()),
-                    Tipo=dataTable.Rows[i]["TIPO"].ToString(),
-                    Historico=dataTable.Rows[i]["HISTORICO"].ToString(),
-                    IdPlanoConta=int.Parse(dataTable.Rows[i]["ID_PLANO_CONTA"].ToString())
+                    Id = int.Parse(dataTable.Rows[i]["ID"].ToString()),
+                    Data = DateTime.Parse(dataTable.Rows[i]["DATA"].ToString()),
+                    Valor = decimal.Parse(dataTable.Rows[i]["VALOR"].ToString()),
+                    Tipo = dataTable.Rows[i]["TIPO"].ToString(),
+                    Historico = dataTable.Rows[i]["HISTORICO"].ToString(),
+                    IdPlanoConta = int.Parse(dataTable.Rows[i]["ID_PLANO_CONTA"].ToString())
                 };
 
                 lista.Add(transacao);

@@ -18,9 +18,4 @@ namespace myfinance_web_netcore.Models
         public string? Descricao{get;set;}
     }
 
-
-
-
-
-
 }

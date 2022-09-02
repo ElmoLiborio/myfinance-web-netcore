@@ -32,6 +32,7 @@ namespace myfinance_web_netcore.Controllers
             if(id!=null)
             {
               var transacao = new Transacao().CarregarTransacaoPorId(id);
+            
               ViewBag.Registro = transacao;
             }
         
@@ -42,9 +43,8 @@ namespace myfinance_web_netcore.Controllers
          public IActionResult CriarTransacao(TransacaoModel formulario)
         {
             var transacao = new Transacao();
-             if(formulario.Id == null)
+             if(formulario.Id == 0)
              {
-             
              transacao.Inserir(formulario);
              }
             else{

@@ -40,29 +40,26 @@ catch{}
 
 <form asp-controller="Transacao" asp-action="FiltrarTransacao">
 
-<div class="form-group">
-    <label>Data Inicial:</label> 
-    <input type="date" class="form-control" asp-for="Data1" value="@vData1">
-    <span asp-validation-for="Data1" class="text-danger"></span>
-</div>
-
-<div class="form-group">
-    <label>Data Final:</label> 
-    <input type="date" class="form-control" asp-for="Data2" value="@vData2">
-    <span asp-validation-for="Data2" class="text-danger"></span>
-</div>
-    <hr>
-
+        <div class="form-group">
+            <label>Data Inicial:</label> 
+            <input type="date" class="form-control" asp-for="Data1" value="@vData1">
+            <span asp-validation-for="Data1" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Data Final:</label> 
+            <input type="date" class="form-control" asp-for="Data2" value="@vData2">
+            <span asp-validation-for="Data2" class="text-danger"></span>
+        </div>
+<hr>
 <table class='table table-bordered'>
 <tr>
     <th>ID</th>
     <th>Data</th>
+    <th>Tipo</th>
     <th>Valor</th>
     <th>Descrição</th>
-    <th>Tipo</th>
     <th>Plano de Conta</th>
 </tr>
-
 @{
     if(@ViewBag.Lista!=null)
     {
@@ -77,13 +74,28 @@ catch{}
                 <td>@item.Descricao</td>
             </tr>
         }
-    }
-        
+    }  
 }
 </table>
-
 <br>
 <button type="submit" class="btn btn-block btn-success">Filtrar</button>
-
 <hr>
 </form>
+<script>
+function formatarMoeda() {
+        var elemento = document.getElementById('valor');
+        var valor = elemento.value;
+
+        valor = valor + '';
+        valor = parseInt(valor.replace(/[\D]+/g, ''));
+        valor = valor + '';
+        valor = valor.replace(/([0-9]{2})$/g, ",$1");
+
+        if (valor.length > 6) {
+            valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+        }
+
+        elemento.value = valor;
+        if(valor == 'NaN') elemento.value = '';
+    }
+    </script>

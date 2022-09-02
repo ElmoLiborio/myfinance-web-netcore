@@ -22,16 +22,15 @@ try
     vPlanoContaId = int.Parse(ViewBag.Registro.IdPlanoConta.ToString());
     vHistorico=@ViewBag.Registro.Historico.ToString();
     vTipo = @ViewBag.Registro.Tipo.ToString();
-    
     CultureInfo invC = CultureInfo.InvariantCulture;
-    string value;
-    value = @ViewBag.Registro.Valor.ToString(invC);
-    vValor = value;
+    vValor = @ViewBag.Registro.Valor.ToString(invC);
 
 }
 catch{}
 
 }
+
+
 
 <h1>@ViewData["Title"]</h1>
 
@@ -51,7 +50,7 @@ catch{}
 
 <div class="form-group">
 <label>Valor:</label>
-<input type="text" class="form-control" asp-for="Valor" step="0.01" value="@vValor">
+<input type="text" id="Valor" class="form-control" asp-for="Valor" step="0.01" value="@vValor" onkeyup="formatarMoeda()">
 <span asp-validation-for="Valor" class="text-danger"></span>
 </div>
 
@@ -80,7 +79,26 @@ catch{}
     </select>
 </div>
 <br>
-<button type="submit" class="btn btn-block btn-success">Enviar</button>
+<button type="submit" class="btn btn-block btn-success"  >Enviar</button>
 
 
 </form>
+
+<script>
+function formatarMoeda() {
+        var elemento = document.getElementById('Valor');
+        var valor = elemento.value;
+
+        valor = valor + '';
+        valor = parseInt(valor.replace(/[\D]+/g, ''));
+        valor = valor + '';
+        valor = valor.replace(/([0-9]{2})$/g, ".$1");
+
+        if (valor.length > 6) {
+            valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ",$1,$2");
+        }
+
+        elemento.value = valor;
+        if(valor == 'NaN') elemento.value = '';
+    }
+</script>
