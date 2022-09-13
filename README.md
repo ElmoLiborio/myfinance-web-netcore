@@ -49,13 +49,13 @@ dotnet run
 
 A seguir são apresentadas algumas telas do projeto em execução no navegador Google Chrome.
 
-### Transações financeiras
+### Transações Financeiras
 <img src="docs/transacoes.PNG" alt="Tela de transacoes">
 
-## Relatórios de Transações Financeiras
+### Relatórios de Transações Financeiras
 <img src="docs/relatorio_transacoes.PNG" alt="Tela de Relatório de transações financeiras">
 
-### Planos de contas
+### Planos de Contas
 <img src="docs/plano_conta.PNG" alt="Tela de planos de conta">
 <br>
 
